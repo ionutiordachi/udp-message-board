@@ -64,20 +64,30 @@ while True:
             este_conectat = False
 
     elif comanda == 'PUBLISH':
+        if not este_conectat:
+            print("EROARE locala: Nu esti conectat la server.")
+            continue
+        if len(parti) < 2 or not parti[1].strip():
+            print("EROARE locala: Trebuie sa furnizezi un text. Ex: PUBLISH salut")
+            continue
         raspuns = trimite_comanda(intrare)
         print(raspuns)
 
     elif comanda == 'DELETE':
+        if not este_conectat:
+            print("EROARE locala: Nu esti conectat la server.")
+            continue
+        if len(parti) < 2 or not parti[1].strip().isdigit():
+            print("EROARE locala: Trebuie sa furnizezi un numar. Ex: DELETE 1")
+            continue
         raspuns = trimite_comanda(intrare)
         print(raspuns)
 
     elif comanda == 'LIST':
+        if not este_conectat:
+            print("EROARE locala: Nu esti conectat la server.")
+            continue
         raspuns = trimite_comanda(intrare)
         print(raspuns)
-
-    else:
-        print(f"Comanda '{comanda}' nu este recunoscuta de client.")
-        print("Comenzi valide: CONNECT, DISCONNECT, PUBLISH, DELETE, LIST, EXIT")
-
 client_socket.close()
 print("Socket inchis. La revedere!")
